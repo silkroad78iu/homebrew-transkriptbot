@@ -1,20 +1,17 @@
 class Transkriptbot < Formula
-  desc "Automated local audio transcription from emails using whisper.cpp"
-  homepage "https://github.com/silkroad78iu/homebrew-transkriptbot"
-  head "https://github.com/silkroad78iu/homebrew-transkriptbot.git", branch: "main"
-
-  depends_on "getmail6"
-  depends_on "ripmime"
-  depends_on "ffmpeg"
-  depends_on "pkg-config"
+  desc "Simple transcript CLI tool"
+  homepage "https://github.com/silkroad78iu/transkriptbot"
+  url "https://github.com/silkroad78iu/transkriptbot/archive/refs/tags/v0.1.tar$
+  sha256 "1b4276d4c5048c8308442ba6d045dd3e627bfa75409f8c5a03571d603c3ea2ba"
+  license "MIT"
+  head "https://github.com/silkroad78iu/transkriptbot.git", branch: "main"
 
   def install
-    system "git", "clone", "https://github.com/ggerganov/whisper.cpp.git"
-    cd "whisper.cpp" do
-      system "make"
-      bin.install "main"
-    end
+    system "g++", "main.cpp", "-o", "transkriptbot"
+    bin.install "transkriptbot"
+  end
 
-    bin.install "scripts/transkriptbot.sh"
+  test do
+    system "#{bin}/transkriptbot", "--help"
   end
 end
